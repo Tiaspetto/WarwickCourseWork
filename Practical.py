@@ -2,7 +2,7 @@ import itertools
 
 def morseDecode(inputStringList):
 	"""
-	This method should take a list of strings as input. Each string is equivalent to one 
+	This method should take a list of strings as input. Each string is equivalent to one letter
 	(i.e. one morse code string).
 	The entire list of strings represents a word.
 	This method should convert the strings from morse code into english, and return the word as a string
