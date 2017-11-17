@@ -1,0 +1,31 @@
+import timeit
+
+def readFile(szFileName):
+	name_prio_list = []
+	try:
+            name_list = open(szFilename, 'r')
+        except IOError:
+            print 'cannot open file: ', szFilename  # catch exception if file can't open
+        else:
+            while True:
+                line = name_list.readline()
+                if line:
+                    result=line.strip().split(',')
+                    result[1] = result[1].rstrip('\n')
+                    name_prio_list.append(result)
+                else:
+                    break  # break in end
+    return name_prio_list
+
+if __name__ == "__main__":
+	file_name = raw_input("Please input file name")
+	unsorted = readFile(file_name)
+    timeStart = timeit.default_timer()
+    #Bubble sort
+    timeEnd = timeit.default_timer()
+    time = timeEnd - timeStart
+
+    timeStart = timeit.default_timer()
+    #Merge sort
+    timeEnd = timeit.default_timer()
+    time = timeEnd - timeStart
