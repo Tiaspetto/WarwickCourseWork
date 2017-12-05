@@ -32,7 +32,7 @@ class Point:
         self._y = fy
 
     def distance(self, vPoint):
-        return sqrt(((self._x-point.x)**2)+((self._y - point.y)**2))
+        return math.sqrt(((self._x-vPoint.x)**2)+((self._y - vPoint.y)**2))
 
 
 class Shape:
@@ -168,7 +168,7 @@ class Square(Shape):
         elif shape.getShapeType() == "circle":
             # expand squre
             expand_topleft = Point(
-                shape.centre.x - shape.radius, shape.centre.y + radius)
+                shape.centre.x - shape.radius, shape.centre.y + shape.radius)
             expand_length = 2 * shape.radius
             return self._envelopSqure(expand_topleft, expand_length)
         else:
@@ -235,7 +235,7 @@ class Assignment:
         return len(self._shapes_dictionary["square"])
 
     def max_circle_area(self):
-        max_area = 0
+        max_area = 0.0
         for circle in self._shapes_dictionary["circle"]:
             temp_area = circle.area()
             max_area = max_area if max_area > temp_area else temp_area
@@ -249,7 +249,7 @@ class Assignment:
         return min_area
 
     def max_square_area(self):
-        max_area = 0
+        max_area = 0.0
         for square in self._shapes_dictionary["square"]:
             temp_area = square.area()
             max_area = max_area if max_area > temp_area else temp_area
@@ -263,25 +263,25 @@ class Assignment:
         return min_area
 
     def mean_circle_area(self):
-        mean_area = 0
+        mean_area = 0.0
         for circle in self._shapes_dictionary["circle"]:
             mean_area += circle.area()
         return mean_area/len(self._shapes_dictionary["circle"])
 
     def mean_square_area(self):
-        mean_area = 0
+        mean_area = 0.0
         for square in self._shapes_dictionary["square"]:
             mean_area += square.area()
         return mean_area/len(self._shapes_dictionary["square"])
 
     def std_dev_circle_area(self):
-        std_dev = 0
+        std_dev = 0.0
         for circle in self._shapes_dictionary["circle"]:
             std_dev += (circle.area() - self.mean_circle_area())**2
         return math.sqrt(std_dev/len(self._shapes_dictionary["circle"]))
 
     def std_dev_square_area(self):
-        std_dev = 0
+        std_dev = 0.0
         for square in self._shapes_dictionary["square"]:
             std_dev += (square.area() - self.mean_square_area())**2
         return math.sqrt(std_dev/len(self._shapes_dictionary["square"]))
@@ -317,3 +317,18 @@ if __name__ == "__main__":
     print "std_dev of square areas in this Dataset is {}".format(assignment.std_dev_square_area())
     print "Median area of circle in Dataset is {}".format(assignment.median_circle_area())
     print "Median area of square in Dataset is {}".format(assignment.median_square_area())
+
+    shape1 = assignment._shapes_dictionary["square"][1]
+    shape2 = assignment._shapes_dictionary["square"][2]
+    shape3 = assignment._shapes_dictionary["circle"][1]
+    shape4 = assignment._shapes_dictionary["circle"][2]
+
+    print shape1.envelops(shape2)
+    print shape3.envelops(shape4)
+    print shape1.envelops(shape3)
+
+    print shape1.equals(shape2)
+    print shape1.equals(shape1)
+    print shape3.equals(shape4)
+    print shape3.equals(shape3)
+    print shape1.topleft.distance(shape2.topleft)
